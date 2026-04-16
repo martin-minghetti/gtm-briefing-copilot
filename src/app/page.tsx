@@ -20,14 +20,17 @@ export default function Home() {
   const [state, setState] = useState<AnalysisState>(initialState);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = useCallback(async (url: string, accountType: AccountTypeValue) => {
+  const handleSubmit = useCallback(async (url: string, accountType: AccountTypeValue, apiKey?: string) => {
     setState(initialState);
     setIsLoading(true);
 
     try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (apiKey) headers["x-api-key"] = apiKey;
+
       const response = await fetch("/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({ url, accountType }),
       });
 

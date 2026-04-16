@@ -40,6 +40,7 @@ export async function POST(request: Request) {
   }
 
   const { url, accountType } = parsed.data;
+  const apiKey = request.headers.get("x-api-key") || undefined;
 
   // Check for demo fixture
   if (isDemoUrl(url)) {
@@ -83,19 +84,19 @@ export async function POST(request: Request) {
         }
 
         // Stage 2: Extract facts
-        const facts = await extractFacts(pages);
+        const facts = await extractFacts(pages, apiKey);
         send({ type: "stage", stage: "evidence", data: { facts }, status: "complete" });
 
         // Stage 3: Analyze
-        const brief = await analyzeFacts(facts, accountType);
+        const brief = await analyzeFacts(facts, accountType, apiKey);
         send({ type: "stage", stage: "brief", data: { sections: brief }, status: "complete" });
 
         // Stage 4: Messaging + CRM
-        const { angles, crmNote } = await generateMessaging(facts, brief, accountType);
+        const { angles, crmNote } = await generateMessaging(facts, brief, accountType, apiKey);
         send({ type: "stage", stage: "messaging", data: { angles, crmNote }, status: "complete" });
 
         // Stage 5: Verify
-        const verification = await verifyAnalysis(facts, brief, angles, crmNote);
+        const verification = await verifyAnalysis(facts, brief, angles, crmNote, apiKey);
         send({ type: "stage", stage: "verification", data: verification, status: "complete" });
 
         send({ type: "done", mode: "live" });

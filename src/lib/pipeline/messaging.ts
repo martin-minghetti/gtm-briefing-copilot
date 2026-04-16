@@ -1,5 +1,4 @@
 import { generateObject } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
 import {
   MessagingAngleSchema,
@@ -11,6 +10,7 @@ import {
   type AccountTypeValue,
 } from "@/lib/schemas";
 import { messagingPrompt } from "@/lib/prompts";
+import { createProvider } from "@/lib/ai-provider";
 
 const MessagingResultSchema = z.object({
   angles: z.array(MessagingAngleSchema),
@@ -20,10 +20,12 @@ const MessagingResultSchema = z.object({
 export async function generateMessaging(
   facts: Fact[],
   brief: BriefSection[],
-  accountType: AccountTypeValue
+  accountType: AccountTypeValue,
+  apiKey?: string
 ): Promise<{ angles: MessagingAngle[]; crmNote: CrmNote }> {
+  const provider = createProvider(apiKey);
   const { object } = await generateObject({
-    model: anthropic("claude-sonnet-4-20250514"),
+    model: provider("claude-sonnet-4-20250514"),
     schema: MessagingResultSchema,
     prompt: messagingPrompt(JSON.stringify(facts), JSON.stringify(brief), accountType),
   });
