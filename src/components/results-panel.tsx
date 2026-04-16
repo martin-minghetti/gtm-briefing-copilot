@@ -45,25 +45,25 @@ export function ResultsPanel({ state }: { state: AnalysisState }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {state.mode && (
-        <Badge variant="outline" className={state.mode === "demo" ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+        <Badge className={state.mode === "demo" ? "bg-indigo-100 text-indigo-700 border-indigo-200" : "bg-emerald-100 text-emerald-700 border-emerald-200"}>
           {state.mode === "demo" ? "Demo Mode" : "Live Mode"}
         </Badge>
       )}
 
       <Tabs defaultValue="evidence">
-        <TabsList>
-          <TabsTrigger value="evidence" disabled={!state.facts}>
+        <TabsList className="bg-muted/80 p-1 gap-1">
+          <TabsTrigger value="evidence" disabled={!state.facts} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
             Evidence {state.facts ? `(${state.facts.length})` : ""}
           </TabsTrigger>
-          <TabsTrigger value="brief" disabled={!state.brief}>
+          <TabsTrigger value="brief" disabled={!state.brief} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
             Account Brief
           </TabsTrigger>
-          <TabsTrigger value="messaging" disabled={!state.messaging}>
+          <TabsTrigger value="messaging" disabled={!state.messaging} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
             Messaging
           </TabsTrigger>
-          <TabsTrigger value="crm" disabled={!state.crmNote}>
+          <TabsTrigger value="crm" disabled={!state.crmNote} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
             CRM Note
           </TabsTrigger>
         </TabsList>

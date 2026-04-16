@@ -3,9 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { Fact } from "@/lib/schemas";
 
 const supportColors: Record<string, string> = {
-  direct: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  inferred: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-  missing: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  direct: "bg-emerald-100 text-emerald-700 border-emerald-200",
+  inferred: "bg-amber-100 text-amber-700 border-amber-200",
+  missing: "bg-red-100 text-red-700 border-red-200",
 };
 
 export function EvidenceTab({ facts }: { facts: Fact[] }) {
@@ -34,7 +34,7 @@ export function EvidenceTab({ facts }: { facts: Fact[] }) {
                   href={fact.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 hover:underline shrink-0"
+                  className="text-xs text-indigo-600 hover:text-indigo-800 hover:underline shrink-0 font-medium"
                 >
                   source
                 </a>

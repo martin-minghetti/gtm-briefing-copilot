@@ -7,7 +7,7 @@ export function MessagingTab({ angles }: { angles: MessagingAngle[] }) {
       {angles.map((angle, i) => (
         <Card key={i}>
           <CardHeader className="pb-2">
-            <CardTitle className="text-base">Angle {i + 1}: {angle.label}</CardTitle>
+            <CardTitle className="text-base"><span className="text-indigo-600">Angle {i + 1}:</span> {angle.label}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <div>

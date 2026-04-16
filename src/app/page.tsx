@@ -96,7 +96,7 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-4xl px-4 py-12">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">GTM Briefing Copilot</h1>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">GTM Briefing Copilot</h1>
           <p className="text-muted-foreground mt-2">
             Paste a company URL — get a verified brief with evidence, account analysis, messaging angles, and a CRM-ready note.
           </p>

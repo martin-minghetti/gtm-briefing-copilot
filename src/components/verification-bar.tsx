@@ -5,10 +5,10 @@ import type { VerificationResult } from "@/lib/schemas";
 export function VerificationBar({ verification }: { verification: VerificationResult }) {
   const coverageColor =
     verification.evidenceCoverage >= 80
-      ? "bg-green-100 text-green-800"
+      ? "bg-emerald-100 text-emerald-700 border-emerald-200"
       : verification.evidenceCoverage >= 60
-        ? "bg-yellow-100 text-yellow-800"
-        : "bg-red-100 text-red-800";
+        ? "bg-amber-100 text-amber-700 border-amber-200"
+        : "bg-red-100 text-red-700 border-red-200";
 
   return (
     <div className="space-y-2">
@@ -17,12 +17,12 @@ export function VerificationBar({ verification }: { verification: VerificationRe
           Evidence Coverage: {verification.evidenceCoverage}%
         </Badge>
         {verification.unsupportedClaims.length > 0 && (
-          <Badge variant="outline" className="bg-yellow-100 text-yellow-800">
+          <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-200">
             {verification.unsupportedClaims.length} unsupported claim{verification.unsupportedClaims.length !== 1 ? "s" : ""}
           </Badge>
         )}
         {verification.contradictions.length > 0 && (
-          <Badge variant="outline" className="bg-red-100 text-red-800">
+          <Badge variant="outline" className="bg-red-100 text-red-700 border-red-200">
             {verification.contradictions.length} contradiction{verification.contradictions.length !== 1 ? "s" : ""}
           </Badge>
         )}

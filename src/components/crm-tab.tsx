@@ -32,7 +32,7 @@ Tags: ${crmNote.tags.join(", ")}`;
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-base">CRM Note — {crmNote.companyName}</CardTitle>
-        <Button variant="outline" size="sm" onClick={handleCopy}>
+        <Button variant={copied ? "default" : "outline"} size="sm" onClick={handleCopy} className={copied ? "bg-emerald-600 hover:bg-emerald-600" : ""}>
           {copied ? "Copied!" : "Copy to Clipboard"}
         </Button>
       </CardHeader>
