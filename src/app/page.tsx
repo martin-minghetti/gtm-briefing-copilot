@@ -104,6 +104,13 @@ export default function Home() {
 
         <div className="mb-8">
           <AnalysisForm onSubmit={handleSubmit} isLoading={isLoading} />
+          <p className="text-xs text-muted-foreground mt-3">
+            Try the demos:{" "}
+            <button type="button" onClick={() => handleSubmit("https://www.oatly.com", "brand")} className="text-indigo-600 hover:underline font-medium" disabled={isLoading}>oatly.com</button>
+            {" (brand) or "}
+            <button type="button" onClick={() => handleSubmit("https://www.sysco.com", "distributor")} className="text-indigo-600 hover:underline font-medium" disabled={isLoading}>sysco.com</button>
+            {" (distributor) — instant, no API key needed."}
+          </p>
         </div>
 
         <ResultsPanel state={state} />
