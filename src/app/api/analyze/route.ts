@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         // Stage 1: Fetch
         const pages = await fetchPages(url);
         if (pages.length === 0) {
-          send({ type: "error", stage: "fetch", message: "Could not fetch any pages from this URL." });
+          send({ type: "error", stage: "fetch", message: "Could not fetch any pages from this URL. The site may block server-side requests (Cloudflare, bot protection). Try a different company URL." });
           controller.close();
           return;
         }
