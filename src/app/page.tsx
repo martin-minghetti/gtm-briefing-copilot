@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { AnalysisForm } from "@/components/analysis-form";
 import { ResultsPanel, type AnalysisState } from "@/components/results-panel";
+import { ThemeToggle } from "@/components/theme-toggle";
 import type { AccountTypeValue } from "@/lib/schemas";
 
 const initialState: AnalysisState = {
@@ -93,26 +94,50 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto max-w-4xl px-4 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">GTM Briefing Copilot</h1>
-          <p className="text-muted-foreground mt-2">
-            Paste a company URL — get a verified brief with evidence, account analysis, messaging angles, and a CRM-ready note.
-          </p>
-        </div>
+    <main className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
+        {/* Header */}
+        <header className="mb-10 flex items-start justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <span className="bg-gradient-to-r from-primary via-indigo-500 to-violet-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-violet-400 dark:to-purple-400">
+                GTM Briefing Copilot
+              </span>
+            </h1>
+            <p className="text-muted-foreground mt-2 max-w-lg text-[15px] leading-relaxed">
+              Paste a company URL — get a verified brief with evidence, account analysis, messaging angles, and a CRM-ready note.
+            </p>
+          </div>
+          <ThemeToggle />
+        </header>
 
-        <div className="mb-8">
+        {/* Form */}
+        <section className="mb-10">
           <AnalysisForm onSubmit={handleSubmit} isLoading={isLoading} />
-          <p className="text-xs text-muted-foreground mt-3">
+          <p className="text-xs text-muted-foreground mt-4">
             Try the demos:{" "}
-            <button type="button" onClick={() => handleSubmit("https://www.oatly.com", "brand")} className="text-indigo-600 hover:underline font-medium" disabled={isLoading}>oatly.com</button>
+            <button
+              type="button"
+              onClick={() => handleSubmit("https://www.oatly.com", "brand")}
+              className="text-primary hover:text-primary/80 hover:underline font-medium transition-colors"
+              disabled={isLoading}
+            >
+              oatly.com
+            </button>
             {" (brand) or "}
-            <button type="button" onClick={() => handleSubmit("https://www.sysco.com", "distributor")} className="text-indigo-600 hover:underline font-medium" disabled={isLoading}>sysco.com</button>
+            <button
+              type="button"
+              onClick={() => handleSubmit("https://www.sysco.com", "distributor")}
+              className="text-primary hover:text-primary/80 hover:underline font-medium transition-colors"
+              disabled={isLoading}
+            >
+              sysco.com
+            </button>
             {" (distributor) — instant, no API key needed."}
           </p>
-        </div>
+        </section>
 
+        {/* Results */}
         <ResultsPanel state={state} />
       </div>
     </main>

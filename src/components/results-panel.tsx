@@ -8,6 +8,7 @@ import { BriefTab } from "./brief-tab";
 import { MessagingTab } from "./messaging-tab";
 import { CrmTab } from "./crm-tab";
 import { VerificationBar } from "./verification-bar";
+import { FileSearch, FileText, MessageSquare, ClipboardList, AlertCircle } from "lucide-react";
 import type { Fact, BriefSection, MessagingAngle, CrmNote, VerificationResult } from "@/lib/schemas";
 
 export interface AnalysisState {
@@ -24,9 +25,9 @@ export interface AnalysisState {
 function TabSkeleton() {
   return (
     <div className="space-y-3">
-      <Skeleton className="h-24 w-full" />
-      <Skeleton className="h-24 w-full" />
-      <Skeleton className="h-24 w-full" />
+      <Skeleton className="h-24 w-full rounded-lg" />
+      <Skeleton className="h-24 w-full rounded-lg" />
+      <Skeleton className="h-24 w-full rounded-lg" />
     </div>
   );
 }
@@ -34,8 +35,12 @@ function TabSkeleton() {
 export function ResultsPanel({ state }: { state: AnalysisState }) {
   if (state.error) {
     return (
-      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
-        {state.error}
+      <div className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive dark:border-destructive/40 dark:bg-destructive/10">
+        <AlertCircle className="size-5 shrink-0 mt-0.5" />
+        <div>
+          <p className="font-medium">Something went wrong</p>
+          <p className="mt-1 opacity-80">{state.error}</p>
+        </div>
       </div>
     );
   }
@@ -45,39 +50,66 @@ export function ResultsPanel({ state }: { state: AnalysisState }) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {state.mode && (
-        <Badge className={state.mode === "demo" ? "bg-indigo-100 text-indigo-700 border-indigo-200" : "bg-emerald-100 text-emerald-700 border-emerald-200"}>
+        <Badge
+          variant="outline"
+          className={
+            state.mode === "demo"
+              ? "bg-primary/10 text-primary border-primary/20 dark:bg-primary/15 dark:border-primary/30"
+              : "bg-emerald-500/10 text-emerald-700 border-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/30"
+          }
+        >
           {state.mode === "demo" ? "Demo Mode" : "Live Mode"}
         </Badge>
       )}
 
       <Tabs defaultValue="evidence">
-        <TabsList className="bg-muted/80 p-1 gap-1">
-          <TabsTrigger value="evidence" disabled={!state.facts} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
+        <TabsList className="bg-muted/60 dark:bg-muted/40 p-1 gap-1 w-full sm:w-auto">
+          <TabsTrigger
+            value="evidence"
+            disabled={!state.facts}
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium gap-1.5"
+          >
+            <FileSearch className="size-3.5 hidden sm:block" />
             Evidence {state.facts ? `(${state.facts.length})` : ""}
           </TabsTrigger>
-          <TabsTrigger value="brief" disabled={!state.brief} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
-            Account Brief
+          <TabsTrigger
+            value="brief"
+            disabled={!state.brief}
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium gap-1.5"
+          >
+            <FileText className="size-3.5 hidden sm:block" />
+            Brief
           </TabsTrigger>
-          <TabsTrigger value="messaging" disabled={!state.messaging} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
+          <TabsTrigger
+            value="messaging"
+            disabled={!state.messaging}
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium gap-1.5"
+          >
+            <MessageSquare className="size-3.5 hidden sm:block" />
             Messaging
           </TabsTrigger>
-          <TabsTrigger value="crm" disabled={!state.crmNote} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium">
+          <TabsTrigger
+            value="crm"
+            disabled={!state.crmNote}
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm font-medium gap-1.5"
+          >
+            <ClipboardList className="size-3.5 hidden sm:block" />
             CRM Note
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="evidence" className="mt-4">
+        <TabsContent value="evidence" className="mt-5">
           {state.facts ? <EvidenceTab facts={state.facts} /> : <TabSkeleton />}
         </TabsContent>
-        <TabsContent value="brief" className="mt-4">
+        <TabsContent value="brief" className="mt-5">
           {state.brief ? <BriefTab sections={state.brief} /> : <TabSkeleton />}
         </TabsContent>
-        <TabsContent value="messaging" className="mt-4">
+        <TabsContent value="messaging" className="mt-5">
           {state.messaging ? <MessagingTab angles={state.messaging} /> : <TabSkeleton />}
         </TabsContent>
-        <TabsContent value="crm" className="mt-4">
+        <TabsContent value="crm" className="mt-5">
           {state.crmNote ? <CrmTab crmNote={state.crmNote} /> : <TabSkeleton />}
         </TabsContent>
       </Tabs>

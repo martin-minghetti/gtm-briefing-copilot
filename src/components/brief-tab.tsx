@@ -5,14 +5,14 @@ export function BriefTab({ sections }: { sections: BriefSection[] }) {
   return (
     <div className="space-y-4">
       {sections.map((section, i) => (
-        <Card key={i}>
+        <Card key={i} className="transition-colors hover:border-primary/30 dark:hover:border-primary/40">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">{section.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm whitespace-pre-line">{section.content}</p>
+            <p className="text-sm leading-relaxed whitespace-pre-line">{section.content}</p>
             {section.factIds.length > 0 && (
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-3 text-xs text-muted-foreground font-mono">
                 Based on: {section.factIds.join(", ")}
               </p>
             )}
