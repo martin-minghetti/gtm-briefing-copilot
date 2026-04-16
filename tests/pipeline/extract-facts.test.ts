@@ -24,7 +24,7 @@ describe("extractFacts", () => {
     ];
 
     mockGenerateObject.mockResolvedValueOnce({
-      object: mockFacts,
+      object: { facts: mockFacts },
     } as any);
 
     const pages: ScrapedPage[] = [

@@ -30,8 +30,8 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
   };
 
   return (
-    <div className="space-y-3">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:flex-row sm:items-end">
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         <div className="flex-1">
           <label htmlFor="url" className="text-sm font-medium text-muted-foreground mb-1.5 block">
             Company URL
@@ -64,7 +64,7 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
         <Button type="submit" disabled={isLoading || !url.trim()}>
           {isLoading ? "Analyzing..." : "Generate Brief"}
         </Button>
-      </form>
+      </div>
 
       <div>
         <button
@@ -92,6 +92,6 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 }

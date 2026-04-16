@@ -13,9 +13,9 @@ export async function extractFacts(pages: ScrapedPage[], apiKey?: string): Promi
 
   const { object } = await generateObject({
     model: provider("claude-sonnet-4-20250514"),
-    schema: z.array(FactSchema),
+    schema: z.object({ facts: z.array(FactSchema) }),
     prompt: extractFactsPrompt(pagesContent),
   });
 
-  return object;
+  return object.facts;
 }

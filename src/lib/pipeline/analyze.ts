@@ -12,9 +12,9 @@ export async function analyzeFacts(
   const provider = createProvider(apiKey);
   const { object } = await generateObject({
     model: provider("claude-sonnet-4-20250514"),
-    schema: z.array(BriefSectionSchema),
+    schema: z.object({ sections: z.array(BriefSectionSchema) }),
     prompt: analyzePrompt(JSON.stringify(facts), accountType),
   });
 
-  return object;
+  return object.sections;
 }

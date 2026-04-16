@@ -21,7 +21,7 @@ describe("analyzeFacts", () => {
     ];
 
     mockGenerateObject.mockResolvedValueOnce({
-      object: mockBrief,
+      object: { sections: mockBrief },
     } as any);
 
     const facts: Fact[] = [
