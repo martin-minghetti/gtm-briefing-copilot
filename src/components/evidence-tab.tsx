@@ -29,7 +29,7 @@ export function EvidenceTab({ facts }: { facts: Fact[] }) {
                   </blockquote>
                 )}
               </div>
-              {fact.support !== "missing" && (
+              {fact.support !== "missing" && fact.sourceUrl?.startsWith("https://") && (
                 <a
                   href={fact.sourceUrl}
                   target="_blank"

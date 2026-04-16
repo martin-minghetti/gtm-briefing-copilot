@@ -88,7 +88,7 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
             />
             <p className="text-[11px] text-muted-foreground">
               Your key is sent directly to the Anthropic API and never stored, logged, or cached.
-              Demo mode works without a key. Leave empty to use the server key.
+              Demo mode works without a key. Live mode requires your own API key.
             </p>
           </div>
         )}
