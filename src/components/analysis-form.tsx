@@ -79,6 +79,7 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
             <Input
               id="apiKey"
               type="password"
+              autoComplete="off"
               placeholder="sk-ant-..."
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
