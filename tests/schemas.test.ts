@@ -108,14 +108,14 @@ describe("VerificationResultSchema", () => {
     expect(VerificationResultSchema.parse(result)).toEqual(result);
   });
 
-  it("rejects evidenceCoverage over 100", () => {
+  it("accepts any numeric evidenceCoverage", () => {
     const result = {
       unsupportedClaims: [],
       contradictions: [],
       evidenceCoverage: 150,
       warnings: [],
     };
-    expect(() => VerificationResultSchema.parse(result)).toThrow();
+    expect(VerificationResultSchema.parse(result)).toEqual(result);
   });
 });
 

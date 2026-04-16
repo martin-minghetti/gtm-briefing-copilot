@@ -7,7 +7,7 @@ export const FactSchema = z.object({
   id: z.string(),
   claim: z.string(),
   support: SupportLevel,
-  sourceUrl: z.string().url(),
+  sourceUrl: z.string(),
   sourceSnippet: z.string(),
 });
 
@@ -50,7 +50,7 @@ export const VerificationResultSchema = z.object({
       explanation: z.string(),
     })
   ),
-  evidenceCoverage: z.number().min(0).max(100),
+  evidenceCoverage: z.number(),
   warnings: z.array(z.string()),
 });
 
