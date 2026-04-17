@@ -66,7 +66,12 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
             <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           </div>
         </div>
-        <Button type="submit" disabled={isLoading || !url.trim()} size="lg" className="h-10">
+        <Button
+          type="submit"
+          disabled={isLoading || !url.trim()}
+          size="lg"
+          className="h-10 bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white shadow-md shadow-violet-500/20 transition-all hover:brightness-110 hover:scale-[1.02] dark:from-indigo-500 dark:via-violet-500 dark:to-purple-500"
+        >
           {isLoading ? (
             <>
               <Loader2 className="size-4 animate-spin" />
@@ -81,17 +86,26 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
         </Button>
       </div>
 
-      <div>
-        <button
-          type="button"
-          onClick={() => setShowApiKey(!showApiKey)}
-          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      {/* BYOK */}
+      <div className="flex flex-col gap-2">
+        <div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setShowApiKey(!showApiKey)}
+            className="gap-1.5"
+          >
+            <KeyRound className="size-3.5" />
+            BYOK
+          </Button>
+        </div>
+        <div
+          className={`overflow-hidden transition-all duration-200 ease-out ${
+            showApiKey ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
-          <KeyRound className="size-3" />
-          {showApiKey ? "Hide API key" : "Bring your own key (BYOK)"}
-        </button>
-        {showApiKey && (
-          <div className="mt-2.5 space-y-1.5">
+          <div className="space-y-1.5 pt-1">
             <Input
               id="apiKey"
               type="password"
@@ -107,7 +121,7 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
               Demo mode works without a key. Live mode requires your own API key.
             </p>
           </div>
-        )}
+        </div>
       </div>
     </form>
   );
